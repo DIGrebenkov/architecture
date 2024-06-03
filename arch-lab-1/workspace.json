@@ -1,0 +1,660 @@
+{
+  "configuration" : { },
+  "description" : "Система, позволяющая осуществлять хранение, обработку и предоставление доступа к данным о пользователях и доставках",
+  "documentation" : { },
+  "id" : 1,
+  "lastModifiedAgent" : "structurizr-javascript",
+  "lastModifiedDate" : "2024-06-03T19:40:36Z",
+  "model" : {
+    "deploymentNodes" : [ {
+      "containerInstances" : [ {
+        "containerId" : "3",
+        "deploymentGroups" : [ "Default" ],
+        "environment" : "Production",
+        "id" : "19",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "f39ddc04-254d-443c-9930-1b1cc37efe8e"
+        },
+        "relationships" : [ {
+          "description" : "Получение или обновление данных о пользователях",
+          "destinationId" : "24",
+          "id" : "25",
+          "linkedRelationshipId" : "10",
+          "sourceId" : "19",
+          "technology" : "TCP:5432"
+        } ],
+        "tags" : "Container Instance"
+      } ],
+      "environment" : "Production",
+      "id" : "18",
+      "instances" : "1",
+      "name" : "User Server",
+      "properties" : {
+        "structurizr.dsl.identifier" : "9467ac39-c11a-48c5-b489-4cf8981e12e5"
+      },
+      "tags" : "Element,Deployment Node"
+    }, {
+      "containerInstances" : [ {
+        "containerId" : "4",
+        "deploymentGroups" : [ "Default" ],
+        "environment" : "Production",
+        "id" : "21",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "79ebe077-dfa5-421e-893a-c0a62c12474d"
+        },
+        "relationships" : [ {
+          "description" : "Получение или обновление данных о доставке",
+          "destinationId" : "24",
+          "id" : "26",
+          "linkedRelationshipId" : "13",
+          "sourceId" : "21",
+          "technology" : "TCP:27018"
+        } ],
+        "tags" : "Container Instance"
+      } ],
+      "environment" : "Production",
+      "id" : "20",
+      "instances" : "1",
+      "name" : "Delivery Server",
+      "properties" : {
+        "structurizr.dsl.identifier" : "4918c304-4d90-4b54-bc7e-30676eeb135f",
+        "CPU" : "12",
+        "HDD" : "4Tb",
+        "RAM" : "256Gb"
+      },
+      "tags" : "Element,Deployment Node"
+    }, {
+      "children" : [ {
+        "containerInstances" : [ {
+          "containerId" : "5",
+          "deploymentGroups" : [ "Default" ],
+          "environment" : "Production",
+          "id" : "24",
+          "instanceId" : 1,
+          "properties" : {
+            "structurizr.dsl.identifier" : "4eccd526-fa69-428b-a85a-8a3ac7b908a7"
+          },
+          "tags" : "Container Instance"
+        } ],
+        "environment" : "Production",
+        "id" : "23",
+        "instances" : "1",
+        "name" : "Database",
+        "properties" : {
+          "structurizr.dsl.identifier" : "ec366120-80b2-4014-82aa-f6bea26b6f50"
+        },
+        "tags" : "Element,Deployment Node"
+      } ],
+      "environment" : "Production",
+      "id" : "22",
+      "instances" : "1",
+      "name" : "databases",
+      "properties" : {
+        "structurizr.dsl.identifier" : "06c6bb09-8687-40ba-b4ef-16924fcd465e"
+      },
+      "tags" : "Element,Deployment Node"
+    } ],
+    "people" : [ {
+      "id" : "1",
+      "location" : "Unspecified",
+      "name" : "Пользователь",
+      "properties" : {
+        "structurizr.dsl.identifier" : "user"
+      },
+      "relationships" : [ {
+        "description" : "Создание нового пользователя или получение информации о нем",
+        "destinationId" : "3",
+        "id" : "14",
+        "properties" : {
+          "structurizr.dsl.identifier" : "rel"
+        },
+        "sourceId" : "1",
+        "tags" : "Relationship",
+        "technology" : "REST HTTP:8080"
+      }, {
+        "description" : "Создание нового пользователя или получение информации о нем",
+        "destinationId" : "2",
+        "id" : "15",
+        "linkedRelationshipId" : "14",
+        "sourceId" : "1",
+        "technology" : "REST HTTP:8080"
+      }, {
+        "description" : "Создание новой доставки или получение информации о ней",
+        "destinationId" : "4",
+        "id" : "16",
+        "properties" : {
+          "structurizr.dsl.identifier" : "da175dad-5721-40fd-b3bd-e42a174ae386"
+        },
+        "sourceId" : "1",
+        "tags" : "Relationship",
+        "technology" : "REST HTTP:8081"
+      }, {
+        "description" : "Запросы к системе доставки",
+        "destinationId" : "2",
+        "id" : "17",
+        "properties" : {
+          "structurizr.dsl.identifier" : "3ac7eb90-314a-4eb8-81ae-c4cc0987429b"
+        },
+        "sourceId" : "1",
+        "tags" : "Relationship",
+        "technology" : "REST HTTP:8080"
+      } ],
+      "tags" : "Element,Person"
+    } ],
+    "softwareSystems" : [ {
+      "containers" : [ {
+        "description" : "Сервис управления пользователями",
+        "documentation" : { },
+        "id" : "3",
+        "name" : "User service",
+        "properties" : {
+          "structurizr.dsl.identifier" : "user_service"
+        },
+        "relationships" : [ {
+          "description" : "Получение или обновление данных о пользователях",
+          "destinationId" : "6",
+          "id" : "9",
+          "properties" : {
+            "structurizr.dsl.identifier" : "c525b4a8-7781-424d-9ea6-4604812cce19"
+          },
+          "sourceId" : "3",
+          "tags" : "Relationship",
+          "technology" : "TCP:5432"
+        }, {
+          "description" : "Получение или обновление данных о пользователях",
+          "destinationId" : "5",
+          "id" : "10",
+          "linkedRelationshipId" : "9",
+          "sourceId" : "3",
+          "technology" : "TCP:5432"
+        }, {
+          "description" : "Получение данных о пользователях",
+          "destinationId" : "7",
+          "id" : "11",
+          "properties" : {
+            "structurizr.dsl.identifier" : "2d1996ef-af5d-4d3b-b787-0e0c023b510b"
+          },
+          "sourceId" : "3",
+          "tags" : "Relationship",
+          "technology" : "TCP:6379"
+        } ],
+        "tags" : "Element,Container"
+      }, {
+        "description" : "Сервис управления доставками",
+        "documentation" : { },
+        "id" : "4",
+        "name" : "Delivery service",
+        "properties" : {
+          "structurizr.dsl.identifier" : "delivery_service"
+        },
+        "relationships" : [ {
+          "description" : "Получение или обновление данных о доставке",
+          "destinationId" : "8",
+          "id" : "12",
+          "properties" : {
+            "structurizr.dsl.identifier" : "36a30668-6617-49ac-8e7d-a03ab6c05369"
+          },
+          "sourceId" : "4",
+          "tags" : "Relationship",
+          "technology" : "TCP:27018"
+        }, {
+          "description" : "Получение или обновление данных о доставке",
+          "destinationId" : "5",
+          "id" : "13",
+          "linkedRelationshipId" : "12",
+          "sourceId" : "4",
+          "technology" : "TCP:27018"
+        } ],
+        "tags" : "Element,Container"
+      }, {
+        "components" : [ {
+          "description" : "База данных пользователей и доставок",
+          "documentation" : { },
+          "id" : "6",
+          "name" : "User Database",
+          "properties" : {
+            "structurizr.dsl.identifier" : "user_database"
+          },
+          "tags" : "Element,Component,database",
+          "technology" : "PostgreSQL 15"
+        }, {
+          "description" : "Кэш данных пользователей для ускорения аутентификации",
+          "documentation" : { },
+          "id" : "7",
+          "name" : "User Cache",
+          "properties" : {
+            "structurizr.dsl.identifier" : "user_cache"
+          },
+          "tags" : "Element,Component,database",
+          "technology" : "Redis"
+        }, {
+          "description" : "База данных для хранения информации о посылках",
+          "documentation" : { },
+          "id" : "8",
+          "name" : "Delivery Database",
+          "properties" : {
+            "structurizr.dsl.identifier" : "delivery_database"
+          },
+          "tags" : "Element,Component,database",
+          "technology" : "MongoDB 5"
+        } ],
+        "documentation" : { },
+        "id" : "5",
+        "name" : "Базы данных",
+        "properties" : {
+          "structurizr.dsl.identifier" : "db"
+        },
+        "tags" : "Element,Container"
+      } ],
+      "description" : "Сервер управления системой доставки",
+      "documentation" : { },
+      "id" : "2",
+      "location" : "Unspecified",
+      "name" : "Система доставки",
+      "properties" : {
+        "structurizr.dsl.identifier" : "delivery"
+      },
+      "tags" : "Element,Software System"
+    } ]
+  },
+  "name" : "Сервис доставки",
+  "properties" : {
+    "structurizr.dsl" : "d29ya3NwYWNlIHsKICAgIG5hbWUgItCh0LXRgNCy0LjRgSDQtNC+0YHRgtCw0LLQutC4IgogICAgZGVzY3JpcHRpb24gItCh0LjRgdGC0LXQvNCwLCDQv9C+0LfQstC+0LvRj9GO0YnQsNGPINC+0YHRg9GJ0LXRgdGC0LLQu9GP0YLRjCDRhdGA0LDQvdC10L3QuNC1LCDQvtCx0YDQsNCx0L7RgtC60YMg0Lgg0L/RgNC10LTQvtGB0YLQsNCy0LvQtdC90LjQtSDQtNC+0YHRgtGD0L/QsCDQuiDQtNCw0L3QvdGL0Lwg0L4g0L/QvtC70YzQt9C+0LLQsNGC0LXQu9GP0YUg0Lgg0LTQvtGB0YLQsNCy0LrQsNGFIgoKICAgIG1vZGVsIHsKICAgICAgICAKICAgICAgICB1c2VyICAgICA9IHBlcnNvbiAi0J/QvtC70YzQt9C+0LLQsNGC0LXQu9GMIgogICAgICAgIGRlbGl2ZXJ5ID0gc29mdHdhcmVTeXN0ZW0gItCh0LjRgdGC0LXQvNCwINC00L7RgdGC0LDQstC60LgiIHsKICAgICAgICAgICAgZGVzY3JpcHRpb24gItCh0LXRgNCy0LXRgCDRg9C/0YDQsNCy0LvQtdC90LjRjyDRgdC40YHRgtC10LzQvtC5INC00L7RgdGC0LDQstC60LgiCgogICAgICAgICAgICB1c2VyX3NlcnZpY2UgPSBjb250YWluZXIgIlVzZXIgc2VydmljZSIgewogICAgICAgICAgICAgICAgZGVzY3JpcHRpb24gItCh0LXRgNCy0LjRgSDRg9C/0YDQsNCy0LvQtdC90LjRjyDQv9C+0LvRjNC30L7QstCw0YLQtdC70Y/QvNC4IgogICAgICAgICAgICB9CgogICAgICAgICAgICBkZWxpdmVyeV9zZXJ2aWNlID0gY29udGFpbmVyICJEZWxpdmVyeSBzZXJ2aWNlIiB7CiAgICAgICAgICAgICAgICBkZXNjcmlwdGlvbiAi0KHQtdGA0LLQuNGBINGD0L/RgNCw0LLQu9C10L3QuNGPINC00L7RgdGC0LDQstC60LDQvNC4IgogICAgICAgICAgICB9CgogICAgICAgICAgICBkYiA9IGNvbnRhaW5lciAi0JHQsNC30Ysg0LTQsNC90L3Ri9GFIiB7CiAgICAgICAgICAgICAgICB1c2VyX2RhdGFiYXNlID0gY29tcG9uZW50ICJVc2VyIERhdGFiYXNlIiB7CiAgICAgICAgICAgICAgICAgICAgZGVzY3JpcHRpb24gItCR0LDQt9CwINC00LDQvdC90YvRhSDQv9C+0LvRjNC30L7QstCw0YLQtdC70LXQuSDQuCDQtNC+0YHRgtCw0LLQvtC6IgogICAgICAgICAgICAgICAgICAgIHRlY2hub2xvZ3kgIlBvc3RncmVTUUwgMTUiCiAgICAgICAgICAgICAgICAgICAgdGFncyAiZGF0YWJhc2UiCiAgICAgICAgICAgICAgICB9CgogICAgICAgICAgICAgICAgdXNlcl9jYWNoZSA9IGNvbXBvbmVudCAiVXNlciBDYWNoZSIgewogICAgICAgICAgICAgICAgICAgIGRlc2NyaXB0aW9uICLQmtGN0Ygg0LTQsNC90L3Ri9GFINC/0L7Qu9GM0LfQvtCy0LDRgtC10LvQtdC5INC00LvRjyDRg9GB0LrQvtGA0LXQvdC40Y8g0LDRg9GC0LXQvdGC0LjRhNC40LrQsNGG0LjQuCIKICAgICAgICAgICAgICAgICAgICB0ZWNobm9sb2d5ICJSZWRpcyIKICAgICAgICAgICAgICAgICAgICB0YWdzICJkYXRhYmFzZSIKICAgICAgICAgICAgICAgIH0KCiAgICAgICAgICAgICAgICBkZWxpdmVyeV9kYXRhYmFzZSA9IGNvbXBvbmVudCAiRGVsaXZlcnkgRGF0YWJhc2UiIHsKICAgICAgICAgICAgICAgICAgICBkZXNjcmlwdGlvbiAi0JHQsNC30LAg0LTQsNC90L3Ri9GFINC00LvRjyDRhdGA0LDQvdC10L3QuNGPINC40L3RhNC+0YDQvNCw0YbQuNC4INC+INC/0L7RgdGL0LvQutCw0YUiCiAgICAgICAgICAgICAgICAgICAgdGVjaG5vbG9neSAiTW9uZ29EQiA1IgogICAgICAgICAgICAgICAgICAgIHRhZ3MgImRhdGFiYXNlIgogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CgogICAgICAgICAgICB1c2VyX3NlcnZpY2UgLT4gdXNlcl9kYXRhYmFzZSAi0J/QvtC70YPRh9C10L3QuNC1INC40LvQuCDQvtCx0L3QvtCy0LvQtdC90LjQtSDQtNCw0L3QvdGL0YUg0L4g0L/QvtC70YzQt9C+0LLQsNGC0LXQu9GP0YUiICJUQ1A6NTQzMiIKICAgICAgICAgICAgdXNlcl9zZXJ2aWNlIC0+IHVzZXJfY2FjaGUgItCf0L7Qu9GD0YfQtdC90LjQtSDQtNCw0L3QvdGL0YUg0L4g0L/QvtC70YzQt9C+0LLQsNGC0LXQu9GP0YUiICJUQ1A6NjM3OSIKCiAgICAgICAgICAgIGRlbGl2ZXJ5X3NlcnZpY2UgLT4gZGVsaXZlcnlfZGF0YWJhc2UgItCf0L7Qu9GD0YfQtdC90LjQtSDQuNC70Lgg0L7QsdC90L7QstC70LXQvdC40LUg0LTQsNC90L3Ri9GFINC+INC00L7RgdGC0LDQstC60LUiICJUQ1A6MjcwMTgiCgogICAgICAgICAgICByZWwgPSB1c2VyIC0+IHVzZXJfc2VydmljZSAi0KHQvtC30LTQsNC90LjQtSDQvdC+0LLQvtCz0L4g0L/QvtC70YzQt9C+0LLQsNGC0LXQu9GPINC40LvQuCDQv9C+0LvRg9GH0LXQvdC40LUg0LjQvdGE0L7RgNC80LDRhtC40Lgg0L4g0L3QtdC8IiAiUkVTVCBIVFRQOjgwODAiCiAgICAgICAgICAgIHVzZXIgLT4gZGVsaXZlcnlfc2VydmljZSAi0KHQvtC30LTQsNC90LjQtSDQvdC+0LLQvtC5INC00L7RgdGC0LDQstC60Lgg0LjQu9C4INC/0L7Qu9GD0YfQtdC90LjQtSDQuNC90YTQvtGA0LzQsNGG0LjQuCDQviDQvdC10LkiICJSRVNUIEhUVFA6ODA4MSIKICAgICAgICB9CgogICAgICAgIHVzZXIgLT4gZGVsaXZlcnkgItCX0LDQv9GA0L7RgdGLINC6INGB0LjRgdGC0LXQvNC1INC00L7RgdGC0LDQstC60LgiICJSRVNUIEhUVFA6ODA4MCIKCiAgICAgICAgZGVwbG95bWVudEVudmlyb25tZW50ICJQcm9kdWN0aW9uIiB7CiAgICAgICAgICAgIGRlcGxveW1lbnROb2RlICJVc2VyIFNlcnZlciIgewogICAgICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2UgdXNlcl9zZXJ2aWNlCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIGRlcGxveW1lbnROb2RlICJEZWxpdmVyeSBTZXJ2ZXIiIHsKICAgICAgICAgICAgICAgIGNvbnRhaW5lckluc3RhbmNlIGRlbGl2ZXJ5X3NlcnZpY2UKICAgICAgICAgICAgICAgIHByb3BlcnRpZXMgewogICAgICAgICAgICAgICAgICAgICJDUFUiICIxMiIKICAgICAgICAgICAgICAgICAgICAiUkFNIiAiMjU2R2IiCiAgICAgICAgICAgICAgICAgICAgIkhERCIgIjRUYiIKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQoKICAgICAgICAgICAgZGVwbG95bWVudE5vZGUgImRhdGFiYXNlcyIgewogICAgIAogICAgICAgICAgICAgICAgZGVwbG95bWVudE5vZGUgIkRhdGFiYXNlIiB7CiAgICAgICAgICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2UgZGIKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQogICAgICAgICAgICAKICAgICAgICB9CiAgICB9CgogICAgdmlld3MgewogICAgICAgIHRoZW1lcyBkZWZhdWx0CgogICAgICAgIHByb3BlcnRpZXMgeyAKICAgICAgICAgICAgc3RydWN0dXJpenIudG9vbHRpcHMgdHJ1ZQogICAgICAgIH0KCiAgICAgICAgc3lzdGVtQ29udGV4dCBkZWxpdmVyeSAiQ29udGV4dCIgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgZXhjbHVkZSByZWwKICAgICAgICAgICAgYXV0b0xheW91dCAKICAgICAgICB9CgogICAgICAgIGNvbnRhaW5lciBkZWxpdmVyeSAiQ29udGFpbmVyIiB7CiAgICAgICAgICAgIGluY2x1ZGUgKgogICAgICAgICAgICBhdXRvTGF5b3V0CiAgICAgICAgfQoKICAgICAgICBjb21wb25lbnQgZGIgIkNvbXBvbmVudCIgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgYXV0b0xheW91dAogICAgICAgIH0KCiAgICAgICAgZGVwbG95bWVudCBkZWxpdmVyeSBQcm9kdWN0aW9uIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIGF1dG9MYXlvdXQKICAgICAgICB9CgogICAgICAgIGR5bmFtaWMgZGVsaXZlcnkgIlVDMDEiICLQodC+0LfQtNCw0L3QuNC1INC90L7QstC+0LPQviDQv9C+0LvRjNC30L7QstCw0YLQtdC70Y8iIHsKICAgICAgICAgICAgYXV0b0xheW91dAogICAgICAgICAgICB1c2VyIC0+IHVzZXJfc2VydmljZSAi0KHQvtC30LTQsNGC0Ywg0L3QvtCy0L7Qs9C+INC/0L7Qu9GM0LfQvtCy0LDRgtC10LvRjyAoUE9TVCAvdXNlcikiCiAgICAgICAgICAgIHVzZXJfc2VydmljZSAtPiBkYiAi0KHQvtGF0YDQsNC90LjRgtGMINC00LDQvdC90YvQtSDQviDQv9C+0LvRjNC30L7QstCw0YLQtdC70LUiIAogICAgICAgICAgICB1c2VyX3NlcnZpY2UgLT4gZGIgItCh0L7RhdGA0LDQvdC40YLRjCDQtNCw0L3QvdGL0LUg0L4g0L/QvtC70YzQt9C+0LLQsNGC0LXQu9C1INCyINC60Y3RiCIgCiAgICAgICAgfQoKICAgICAgICBkeW5hbWljIGRlbGl2ZXJ5ICJVQzAyIiAi0J/QvtC40YHQuiDQv9C+0LvRjNC30L7QstCw0YLQtdC70Y8iIHsKICAgICAgICAgICAgYXV0b0xheW91dAogICAgICAgICAgICB1c2VyIC0+IHVzZXJfc2VydmljZSAi0J3QsNC50YLQuCDQv9C+0LvRjNC30L7QstCw0YLQtdC70Y8gKEdFVCAvdXNlcikiCiAgICAgICAgICAgIHVzZXJfc2VydmljZSAtPiBkYiAi0J3QsNC50YLQuCDQtNCw0L3QvdGL0LUg0L/QvtC70YzQt9C+0LLQsNGC0LXQu9GPINCyINC60Y3RiNC1IgogICAgICAgICAgICB1c2VyX3NlcnZpY2UgLT4gZGIgItCd0LDQudGC0Lgg0LTQsNC90L3Ri9C1INC/0L7Qu9GM0LfQvtCy0LDRgtC10LvRjyDQsiDQsdCw0LfQtSDQtNCw0L3QvdGL0YUiCiAgICAgICAgfQoKICAgICAgICBkeW5hbWljIGRlbGl2ZXJ5ICJVQzAzIiAi0KHQvtC30LTQsNC90LjQtSDQtNC+0YHRgtCw0LLQutC4IiB7CiAgICAgICAgICAgIGF1dG9MYXlvdXQKICAgICAgICAgICAgdXNlciAtPiBkZWxpdmVyeV9zZXJ2aWNlICLQodC+0LfQtNCw0YLRjCDQvdC+0LLRg9GOINC00L7RgdGC0LDQstC60YMgKFBPU1QgL2RlbGl2ZXJ5KSIKICAgICAgICAgICAgZGVsaXZlcnlfc2VydmljZSAtPiBkYiAi0KHQvtGF0YDQsNC90LjRgtGMINC00LDQvdC90YvQtSDQviDQtNC+0YHRgtCw0LLQutC1IiAKICAgICAgICB9CgogICAgICAgIGR5bmFtaWMgZGVsaXZlcnkgIlVDMDQiICLQn9C+0LvRg9GH0LXQvdC40LUg0LjQvdGE0L7RgNC80LDRhtC40Lgg0L4g0LTQvtGB0YLQsNCy0LrQtSIgewogICAgICAgICAgICBhdXRvTGF5b3V0CiAgICAgICAgICAgIHVzZXIgLT4gZGVsaXZlcnlfc2VydmljZSAi0J/QvtC70YPRh9C40YLRjCDQuNC90YTQvtGA0LzQsNGG0LjRjiDQviDQtNC+0YHRgtCw0LLQutC1IChHRVQgL2RlbGl2ZXJ5KSIKICAgICAgICAgICAgZGVsaXZlcnlfc2VydmljZSAtPiBkYiAi0J3QsNC50YLQuCDQtNCw0L3QvdGL0LUg0L4g0LTQvtGB0YLQsNCy0LrQtSIgCiAgICAgICAgfQoKCiAgICAgICAgc3R5bGVzIHsKICAgICAgICAgICAgZWxlbWVudCAiZGF0YWJhc2UiIHsKICAgICAgICAgICAgICAgIHNoYXBlIGN5bGluZGVyCiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICB9Cn0K"
+  },
+  "views" : {
+    "componentViews" : [ {
+      "automaticLayout" : {
+        "applied" : true,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "containerId" : "5",
+      "dimensions" : {
+        "height" : 1391,
+        "width" : 2390
+      },
+      "elements" : [ {
+        "id" : "3",
+        "x" : 594,
+        "y" : 199
+      }, {
+        "id" : "4",
+        "x" : 1719,
+        "y" : 199
+      }, {
+        "id" : "6",
+        "x" : 969,
+        "y" : 799
+      }, {
+        "id" : "7",
+        "x" : 219,
+        "y" : 799
+      }, {
+        "id" : "8",
+        "x" : 1719,
+        "y" : 799
+      } ],
+      "externalContainerBoundariesVisible" : false,
+      "key" : "Component",
+      "order" : 3,
+      "relationships" : [ {
+        "id" : "11"
+      }, {
+        "id" : "12"
+      }, {
+        "id" : "9"
+      } ]
+    } ],
+    "configuration" : {
+      "branding" : { },
+      "lastSavedView" : "Deployment-001",
+      "metadataSymbols" : "SquareBrackets",
+      "properties" : {
+        "structurizr.tooltips" : "true"
+      },
+      "styles" : {
+        "elements" : [ {
+          "shape" : "Cylinder",
+          "tag" : "database"
+        } ]
+      },
+      "terminology" : { },
+      "themes" : [ "https://static.structurizr.com/themes/default/theme.json" ]
+    },
+    "containerViews" : [ {
+      "automaticLayout" : {
+        "applied" : true,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 1991,
+        "width" : 1640
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 595,
+        "y" : 200
+      }, {
+        "id" : "3",
+        "x" : 970,
+        "y" : 800
+      }, {
+        "id" : "4",
+        "x" : 220,
+        "y" : 800
+      }, {
+        "id" : "5",
+        "x" : 595,
+        "y" : 1400
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "key" : "Container",
+      "order" : 2,
+      "relationships" : [ {
+        "id" : "10"
+      }, {
+        "id" : "13"
+      }, {
+        "id" : "14"
+      }, {
+        "id" : "16"
+      } ],
+      "softwareSystemId" : "2"
+    } ],
+    "deploymentViews" : [ {
+      "automaticLayout" : {
+        "applied" : true,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 1548,
+        "width" : 1640
+      },
+      "elements" : [ {
+        "id" : "18",
+        "x" : 175,
+        "y" : 175
+      }, {
+        "id" : "19",
+        "x" : 219,
+        "y" : 219
+      }, {
+        "id" : "20",
+        "x" : 175,
+        "y" : 175
+      }, {
+        "id" : "21",
+        "x" : 969,
+        "y" : 219
+      }, {
+        "id" : "22",
+        "x" : 175,
+        "y" : 175
+      }, {
+        "id" : "23",
+        "x" : 175,
+        "y" : 175
+      }, {
+        "id" : "24",
+        "x" : 569,
+        "y" : 865
+      } ],
+      "environment" : "Production",
+      "generatedKey" : true,
+      "key" : "Deployment-001",
+      "order" : 4,
+      "relationships" : [ {
+        "id" : "25"
+      }, {
+        "id" : "26"
+      } ],
+      "softwareSystemId" : "2"
+    } ],
+    "dynamicViews" : [ {
+      "automaticLayout" : {
+        "applied" : true,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "description" : "Создание нового пользователя",
+      "dimensions" : {
+        "height" : 1991,
+        "width" : 890
+      },
+      "elementId" : "2",
+      "elements" : [ {
+        "id" : "1",
+        "x" : 220,
+        "y" : 200
+      }, {
+        "id" : "3",
+        "x" : 220,
+        "y" : 800
+      }, {
+        "id" : "5",
+        "x" : 220,
+        "y" : 1400
+      } ],
+      "externalBoundariesVisible" : false,
+      "key" : "UC01",
+      "order" : 5,
+      "relationships" : [ {
+        "description" : "Создать нового пользователя (POST /user)",
+        "id" : "14",
+        "order" : "1",
+        "response" : false
+      }, {
+        "description" : "Сохранить данные о пользователе",
+        "id" : "10",
+        "order" : "2",
+        "response" : false,
+        "vertices" : [ {
+          "x" : 295,
+          "y" : 1250
+        } ]
+      }, {
+        "description" : "Сохранить данные о пользователе в кэш",
+        "id" : "10",
+        "order" : "3",
+        "response" : false,
+        "vertices" : [ {
+          "x" : 595,
+          "y" : 1250
+        } ]
+      } ]
+    }, {
+      "automaticLayout" : {
+        "applied" : true,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "description" : "Поиск пользователя",
+      "dimensions" : {
+        "height" : 1991,
+        "width" : 891
+      },
+      "elementId" : "2",
+      "elements" : [ {
+        "id" : "1",
+        "x" : 220,
+        "y" : 200
+      }, {
+        "id" : "3",
+        "x" : 220,
+        "y" : 800
+      }, {
+        "id" : "5",
+        "x" : 220,
+        "y" : 1400
+      } ],
+      "externalBoundariesVisible" : false,
+      "key" : "UC02",
+      "order" : 6,
+      "relationships" : [ {
+        "description" : "Найти пользователя (GET /user)",
+        "id" : "14",
+        "order" : "1",
+        "response" : false
+      }, {
+        "description" : "Найти данные пользователя в кэше",
+        "id" : "10",
+        "order" : "2",
+        "response" : false,
+        "vertices" : [ {
+          "x" : 295,
+          "y" : 1250
+        } ]
+      }, {
+        "description" : "Найти данные пользователя в базе данных",
+        "id" : "10",
+        "order" : "3",
+        "response" : false,
+        "vertices" : [ {
+          "x" : 595,
+          "y" : 1250
+        } ]
+      } ]
+    }, {
+      "automaticLayout" : {
+        "applied" : true,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "description" : "Создание доставки",
+      "dimensions" : {
+        "height" : 1991,
+        "width" : 890
+      },
+      "elementId" : "2",
+      "elements" : [ {
+        "id" : "1",
+        "x" : 220,
+        "y" : 200
+      }, {
+        "id" : "4",
+        "x" : 220,
+        "y" : 800
+      }, {
+        "id" : "5",
+        "x" : 220,
+        "y" : 1400
+      } ],
+      "externalBoundariesVisible" : false,
+      "key" : "UC03",
+      "order" : 7,
+      "relationships" : [ {
+        "description" : "Создать новую доставку (POST /delivery)",
+        "id" : "16",
+        "order" : "1",
+        "response" : false
+      }, {
+        "description" : "Сохранить данные о доставке",
+        "id" : "13",
+        "order" : "2",
+        "response" : false
+      } ]
+    }, {
+      "automaticLayout" : {
+        "applied" : true,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "description" : "Получение информации о доставке",
+      "dimensions" : {
+        "height" : 1991,
+        "width" : 890
+      },
+      "elementId" : "2",
+      "elements" : [ {
+        "id" : "1",
+        "x" : 220,
+        "y" : 200
+      }, {
+        "id" : "4",
+        "x" : 220,
+        "y" : 800
+      }, {
+        "id" : "5",
+        "x" : 220,
+        "y" : 1400
+      } ],
+      "externalBoundariesVisible" : false,
+      "key" : "UC04",
+      "order" : 8,
+      "relationships" : [ {
+        "description" : "Получить информацию о доставке (GET /delivery)",
+        "id" : "16",
+        "order" : "1",
+        "response" : false
+      }, {
+        "description" : "Найти данные о доставке",
+        "id" : "13",
+        "order" : "2",
+        "response" : false
+      } ]
+    } ],
+    "systemContextViews" : [ {
+      "automaticLayout" : {
+        "applied" : true,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 1300,
+        "width" : 850
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 200,
+        "y" : 200
+      }, {
+        "id" : "2",
+        "x" : 200,
+        "y" : 800
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "Context",
+      "order" : 1,
+      "relationships" : [ {
+        "id" : "17"
+      } ],
+      "softwareSystemId" : "2"
+    } ]
+  }
+}
