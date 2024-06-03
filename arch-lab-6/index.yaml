@@ -1,0 +1,507 @@
+openapi: '3.0.0'
+info:
+  version: '1.0.0'
+  title: 'Lab 6'
+  description: API Gateway
+servers:
+  - url: http://localhost:8888
+    description: Gateway server
+paths:
+  /user:
+    get:
+      summary: Чтение информации о пользователе
+      parameters:
+      - name: id
+        description: Уникальный идентификатор пользователя
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/user_id'
+      responses:
+        '200':
+          description: Найденный пользователь
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+        404:
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - basicAuth: []
+    post:
+      summary: Добавление нового пользователя
+      parameters:
+      - name: name
+        description: Имя пользователя
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: surname
+        description: Фамилия пользователя
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: email
+        description: email пользователя
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: login
+        description: login пользователя
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: password
+        description: пароль пользователя
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Идентификатор добавленного пользователя
+          content:
+            application/json:
+              schema:
+                type: integer
+        404:
+          description: Ошибка добавления пользователя
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - basicAuth: []
+    put:
+      summary: Обновление данных пользователя
+      parameters:
+      - name: login
+        description: login пользователя
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: password
+        description: пароль пользователя
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: name
+        description: Новое имя пользователя
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: surname
+        description: Новая фамилия пользователя
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: email
+        description: новый email пользователя
+        in: query
+        required: true
+        schema:
+          type: string
+      
+      responses:
+        '200':
+          description: Идентификатор добавленного пользователя
+          content:
+            application/json:
+              schema:
+                type: integer
+        404:
+          description: Ошибка добавления пользователя
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - basicAuth: []
+    
+    delete:
+      summary: Удаление данных пользователя
+      parameters:
+      - name: login
+        description: login пользователя
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: password
+        description: пароль пользователя
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Идентификатор удаленного пользователя
+          content:
+            application/json:
+              schema:
+                type: integer
+        404:
+          description: Ошибка удаления пользователя
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - basicAuth: []
+      
+  /user/search:
+    get:
+      summary: Поиск пользователей по маске имени и фамилии
+      parameters:
+      - name: name
+        description: Имя
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: surname
+        description: Фамилия
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The users for the provided masks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/users'
+        404:
+          description: No user found for the provided mask
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - basicAuth: []
+  /user/auth:
+    get:
+      summary: Проверка аутентификации
+      responses:
+        '200':
+          description: User ID
+          content:
+            application/json:
+              schema:
+               type: string
+        401:
+          description: Unauthorized Error
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+        - basicAuth: []
+  /delivery:
+    get:
+      summary: Чтение информации о доставке
+      parameters:
+      - name: delivery_id
+        description: Уникальный идентификатор доставки
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/delivery_id'
+      responses:
+        '200':
+          description: Найденная доставка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/delivery'
+        404:
+          description: Доставка не найдена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - basicAuth: []
+    put:
+      summary: Обновление информации о доставке
+      parameters:
+      - name: delivery_id
+        description: Идентификатор доставки
+        in: query
+        required: true
+        schema:
+          type: integer
+          default: 1
+      - name: sender_id
+        description: Идентификатор отправителя
+        in: query
+        required: true
+        schema:
+          type: integer
+          default: 1
+      - name: receiver_id
+        description: Идентификатор получателя
+        in: query
+        required: true
+        schema:
+          type: integer
+          default: 1
+      - name: date
+        description: Дата отправки
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: weight
+        description: Масса посылки
+        in: query
+        required: true
+        schema:
+          type: number
+      - name: height
+        description: Высота посылки
+        in: query
+        required: true
+        schema:
+          type: number
+      - name: width
+        description: Ширина посылки
+        in: query
+        required: true
+        schema:
+          type: number
+      - name: length
+        description: Длина посылки
+        in: query
+        required: true
+        schema:
+          type: number
+      responses:
+        '200':
+          description: Идентификатор добавленной доставки
+          content:
+            application/json:
+              schema:
+                type: integer
+        404:
+          description: Ошибка добавления доставки
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - basicAuth: []
+    post:
+      summary: Добавление новой доставки
+      parameters:
+      - name: delivery_id
+        description: Идентификатор доставки
+        in: query
+        required: true
+        schema:
+          type: integer
+          default: 1
+      - name: sender_id
+        description: Идентификатор отправителя
+        in: query
+        required: true
+        schema:
+          type: integer
+          default: 1
+      - name: receiver_id
+        description: Идентификатор получателя
+        in: query
+        required: true
+        schema:
+          type: integer
+          default: 1
+      - name: date
+        description: Дата отправки
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: weight
+        description: Масса посылки
+        in: query
+        required: true
+        schema:
+          type: number
+      - name: height
+        description: Высота посылки
+        in: query
+        required: true
+        schema:
+          type: number
+      - name: width
+        description: Ширина посылки
+        in: query
+        required: true
+        schema:
+          type: number
+      - name: length
+        description: Длина посылки
+        in: query
+        required: true
+        schema:
+          type: number
+      responses:
+        '200':
+          description: Идентификатор добавленной доставки
+          content:
+            application/json:
+              schema:
+                type: integer
+        404:
+          description: Ошибка добавления доставки
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - basicAuth: []
+    delete:
+      summary: Удаление информации о доставке
+      parameters:
+      - name: delivery_id
+        description: Уникальный идентификатор доставки
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/delivery_id'
+      responses:
+        '200':
+          description: Доставка удалена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/delivery'
+        404:
+          description: Доставка не найдена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - basicAuth: []
+components:
+  schemas:
+    user_id:
+      description: Уникальный идентификатор пользователя
+      type: integer
+    users:
+      type: array
+      items:
+        $ref: '#/components/schemas/user'
+    user:
+      type: object
+      required:
+        - id
+        - name
+        - surname
+        - email
+        - login
+        - password
+      properties:
+        id:
+          $ref: '#/components/schemas/user_id'
+        name:
+          type: string
+        surname:
+          type: string
+        email:
+          type: string
+        login:
+          type: string
+        password:
+          type: string
+    delivery_id:
+      description: Уникальный идентификатор
+      type: integer
+    delivery:
+      type: array
+      items:
+        $ref: '#/components/schemas/delivery'
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          description: Сообщение об ошибке
+          type: string
+  securitySchemes:
+      basicAuth:     
+        type: http
+        scheme: basic
+      bearerAuth:
+        type: http
+        scheme: bearer
+        bearerFormat: JWT
